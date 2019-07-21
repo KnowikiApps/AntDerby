@@ -9,6 +9,26 @@ import {
 } from 'react-native';
 
 class AntPage extends Component {
+  constructor() {
+    super();
+    this.state = {
+      ants: [],
+    };
+  }
+
+  componentDidMount() {
+    fetch('https://antserver-blocjgjbpw.now.sh/graphql', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ query: 'query{ants{name color length weight}}' }),
+    })
+      .then(res => res.json())
+      .then(res => {
+        this.setState(res.data);
+      })
+      .catch(err => console.log(JSON.stringify(err)));
+  }
+
   render() {
     return (
       <Fragment>
@@ -19,7 +39,9 @@ class AntPage extends Component {
             style={styles.scrollView}
           >
             <View style={styles.body}>
-              <Text>stuff and things</Text>
+              {this.state.ants.map((ant, index) => {
+                return <Text key={index}>{ant.name}</Text>;
+              })}
             </View>
           </ScrollView>
         </SafeAreaView>
