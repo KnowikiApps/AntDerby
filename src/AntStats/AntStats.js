@@ -23,15 +23,12 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   column1: {
-    height: 50,
     flex: 1,
   },
   column2: {
-    height: 50,
     flex: 2,
   },
   column3: {
-    height: 50,
     flex: 1,
   },
 });
