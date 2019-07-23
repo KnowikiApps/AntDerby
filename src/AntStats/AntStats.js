@@ -19,7 +19,16 @@ function AntStats(props) {
         <Text>{`length: ${props.length}`}</Text>
         <Text>{`weight: ${props.weight}`}</Text>
       </View>
-      <View style={styles.column3} />
+      <View style={styles.column3}>
+        <View>
+          <Text style={styles.headingText}>Odds</Text>
+          <Text style={styles.infoText}>{props.odds}</Text>
+        </View>
+        <View>
+          <Text style={styles.headingText}>Status</Text>
+          <Text style={styles.infoText}>{props.status}</Text>
+        </View>
+      </View>
     </View>
   );
 }
@@ -43,6 +52,13 @@ const styles = StyleSheet.create({
     height: undefined,
     width: undefined,
   },
+  headingText: {
+    textAlign: 'center',
+    fontWeight: 'bold',
+  },
+  infoText: {
+    textAlign: 'center',
+  },
 });
 
 AntStats.propTypes = {
@@ -50,6 +66,8 @@ AntStats.propTypes = {
   color: PropTypes.string.isRequired,
   length: PropTypes.number.isRequired,
   weight: PropTypes.number.isRequired,
+  odds: PropTypes.number.isRequired,
+  status: PropTypes.string.isRequired,
 };
 
 export default AntStats;
