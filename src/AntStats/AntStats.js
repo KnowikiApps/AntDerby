@@ -10,6 +10,7 @@ function AntStats(props) {
           source={require('../img/Ant.png')}
           style={[styles.antImage, { tintColor: props.color.toLowerCase() }]}
           resizeMode="contain"
+          transform={[{ scaleX: '0.75' }, { scaleY: '0.75' }]}
         />
       </View>
       <View style={styles.column2}>
