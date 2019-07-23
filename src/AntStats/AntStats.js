@@ -1,38 +1,48 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { StyleSheet, Text, View, Image } from 'react-native';
 import PropTypes from 'prop-types';
 
-function AntStats(props) {
-  return (
-    <View style={styles.rowLayout}>
-      <View style={styles.column1}>
-        <Image
-          source={require('../img/Ant.png')}
-          style={[styles.antImage, { tintColor: props.color.toLowerCase() }]}
-          resizeMode="contain"
-          transform={[{ scaleX: '0.75' }, { scaleY: '0.75' }]}
-        />
-      </View>
-      <View style={styles.column2}>
-        <Text>{props.name}</Text>
-        <Text>{`color: ${props.color}`}</Text>
-        <View style={styles.rowLayout}>
-          <Text>{`length: ${props.length}`}</Text>
-          <Text>{`    weight: ${props.weight}`}</Text>
+class AntStats extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
+
+  render() {
+    return (
+      <View style={styles.rowLayout}>
+        <View style={styles.column1}>
+          <Image
+            source={require('../img/Ant.png')}
+            style={[
+              styles.antImage,
+              { tintColor: this.props.color.toLowerCase() },
+            ]}
+            resizeMode="contain"
+            transform={[{ scaleX: '0.75' }, { scaleY: '0.75' }]}
+          />
+        </View>
+        <View style={styles.column2}>
+          <Text>{this.props.name}</Text>
+          <Text>{`color: ${this.props.color}`}</Text>
+          <View style={styles.rowLayout}>
+            <Text>{`length: ${this.props.length}`}</Text>
+            <Text>{`    weight: ${this.props.weight}`}</Text>
+          </View>
+        </View>
+        <View style={styles.column3}>
+          <View>
+            <Text style={styles.headingText}>Odds</Text>
+            <Text style={styles.infoText}>{this.props.odds}</Text>
+          </View>
+          <View>
+            <Text style={styles.headingText}>Status</Text>
+            <Text style={styles.infoText}>{this.props.status}</Text>
+          </View>
         </View>
       </View>
-      <View style={styles.column3}>
-        <View>
-          <Text style={styles.headingText}>Odds</Text>
-          <Text style={styles.infoText}>{props.odds}</Text>
-        </View>
-        <View>
-          <Text style={styles.headingText}>Status</Text>
-          <Text style={styles.infoText}>{props.status}</Text>
-        </View>
-      </View>
-    </View>
-  );
+    );
+  }
 }
 
 const styles = StyleSheet.create({
