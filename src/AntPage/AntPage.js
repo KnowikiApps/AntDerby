@@ -45,7 +45,14 @@ class AntPage extends Component {
           <FlatList
             data={this.state.ants}
             keyExtractor={(item, index) => index.toString()}
-            renderItem={({ item }) => <AntStats name={item.name} />}
+            renderItem={({ item }) => (
+              <AntStats
+                name={item.name}
+                color={item.color}
+                length={item.length}
+                weight={item.weight}
+              />
+            )}
           />
         </SafeAreaView>
       </Fragment>
