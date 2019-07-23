@@ -8,6 +8,9 @@ function AntStats(props) {
       <View style={styles.column1} />
       <View style={styles.column2}>
         <Text>{props.name}</Text>
+        <Text>{`color: ${props.color}`}</Text>
+        <Text>{`length: ${props.length}`}</Text>
+        <Text>{`weight: ${props.weight}`}</Text>
       </View>
       <View style={styles.column3} />
     </View>
