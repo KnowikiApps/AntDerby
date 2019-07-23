@@ -21,6 +21,7 @@ class AntPage extends Component {
 
     this.generateAntWinLikelihoodCalculator = this.generateAntWinLikelihoodCalculator.bind(this);  // eslint-disable-line prettier/prettier
     this.generateCalculators = this.generateCalculators.bind(this);
+    this.handleAntStatusChange = this.handleAntStatusChange.bind(this);
   }
 
   componentDidMount() {
@@ -58,6 +59,13 @@ class AntPage extends Component {
     };
   }
 
+  handleAntStatusChange(index, state) {
+    let temp = this.state.ants;
+    temp[index].odds = state.odds;
+    temp[index].status = state.status;
+    this.setState({ ants: temp });
+  }
+
   render() {
     return (
       <Fragment>
@@ -67,14 +75,15 @@ class AntPage extends Component {
             <FlatList
               data={this.state.ants}
               keyExtractor={(item, index) => index.toString()}
-              renderItem={({ item }) => (
+              renderItem={({ item, index }) => (
                 <AntStats
                   name={item.name}
                   color={item.color}
                   length={item.length}
                   weight={item.weight}
                   generator={item.gen}
-                  status="in progress"
+                  onStatusChange={this.handleAntStatusChange}
+                  index={index}
                 />
               )}
             />

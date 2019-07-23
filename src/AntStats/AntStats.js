@@ -14,17 +14,18 @@ class AntStats extends Component {
   }
 
   componentDidMount() {
-    // this.runCalculation();
     setTimeout(this.runCalculation, 5000);
   }
 
   runCalculation() {
     this.props.generator(this.handleGenerator);
-    this.setState({ status: 'in progress' });
+    this.setState({ odds: 0, status: 'in progress', name: this.props.name });
+    this.props.onStatusChange(this.props.index, this.state);
   }
 
   handleGenerator(value) {
     this.setState({ odds: value, status: 'calculated' });
+    this.props.onStatusChange(this.props.index, this.state);
   }
 
   render() {
@@ -99,7 +100,8 @@ AntStats.propTypes = {
   length: PropTypes.number.isRequired,
   weight: PropTypes.number.isRequired,
   generator: PropTypes.func,
-  status: PropTypes.string.isRequired,
+  onStatusChange: PropTypes.func,
+  index: PropTypes.number,
 };
 
 export default AntStats;
