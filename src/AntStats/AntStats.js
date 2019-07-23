@@ -8,7 +8,7 @@ function AntStats(props) {
       <View style={styles.column1}>
         <Image
           source={require('../img/Ant.png')}
-          style={styles.antImage}
+          style={[styles.antImage, { tintColor: props.color.toLowerCase() }]}
           resizeMode="contain"
         />
       </View>
