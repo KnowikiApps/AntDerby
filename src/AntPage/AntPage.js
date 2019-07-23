@@ -16,6 +16,7 @@ class AntPage extends Component {
     super();
     this.state = {
       ants: [],
+      ready: false,
     };
 
     this.generateAntWinLikelihoodCalculator = this.generateAntWinLikelihoodCalculator.bind(this);  // eslint-disable-line prettier/prettier
@@ -43,7 +44,7 @@ class AntPage extends Component {
       updated.gen = this.generateAntWinLikelihoodCalculator();
       temp.push(updated);
     });
-    this.setState({ ants: temp });
+    this.setState({ ants: temp, ready: true });
   }
 
   generateAntWinLikelihoodCalculator() {
@@ -62,20 +63,24 @@ class AntPage extends Component {
       <Fragment>
         <StatusBar barStyle="dark-content" />
         <SafeAreaView>
-          <FlatList
-            data={this.state.ants}
-            keyExtractor={(item, index) => index.toString()}
-            renderItem={({ item }) => (
-              <AntStats
-                name={item.name}
-                color={item.color}
-                length={item.length}
-                weight={item.weight}
-                generator={item.gen}
-                status="in progress"
-              />
-            )}
-          />
+          {this.state.ready ? (
+            <FlatList
+              data={this.state.ants}
+              keyExtractor={(item, index) => index.toString()}
+              renderItem={({ item }) => (
+                <AntStats
+                  name={item.name}
+                  color={item.color}
+                  length={item.length}
+                  weight={item.weight}
+                  generator={item.gen}
+                  status="in progress"
+                />
+              )}
+            />
+          ) : (
+            <View />
+          )}
         </SafeAreaView>
       </Fragment>
     );
