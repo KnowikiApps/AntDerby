@@ -69,7 +69,7 @@ AntStats.propTypes = {
   color: PropTypes.string.isRequired,
   length: PropTypes.number.isRequired,
   weight: PropTypes.number.isRequired,
-  odds: PropTypes.number.isRequired,
+  generator: PropTypes.func,
   status: PropTypes.string.isRequired,
 };
 
