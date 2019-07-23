@@ -46,6 +46,8 @@ class AntPage extends Component {
                 color={item.color}
                 length={item.length}
                 weight={item.weight}
+                odds={23}
+                status="in progress"
               />
             )}
           />
