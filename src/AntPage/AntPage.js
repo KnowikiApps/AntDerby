@@ -6,6 +6,7 @@ import {
   View,
   Text,
   StatusBar,
+  FlatList,
 } from 'react-native';
 
 class AntPage extends Component {
@@ -24,7 +25,12 @@ class AntPage extends Component {
     })
       .then(res => res.json())
       .then(res => {
-        this.setState(res.data);
+        let temp = res.data.ants.concat(res.data.ants);
+        let doug = temp.concat(temp).concat(temp);
+        // console.log(JSON.stringify(doug));
+        this.setState({ ants: doug.concat(doug) });
+        // this.setState(temp);
+        // console.log(JSON.stringify(this.state));
       })
       .catch(err => console.log(JSON.stringify(err)));
   }
@@ -34,16 +40,11 @@ class AntPage extends Component {
       <Fragment>
         <StatusBar barStyle="dark-content" />
         <SafeAreaView>
-          <ScrollView
-            contentInsetAdjustmentBehavior="automatic"
-            style={styles.scrollView}
-          >
-            <View style={styles.body}>
-              {this.state.ants.map((ant, index) => {
-                return <Text key={index}>{ant.name}</Text>;
-              })}
-            </View>
-          </ScrollView>
+          <FlatList
+            data={this.state.ants}
+            keyExtractor={(item, index) => index.toString()}
+            renderItem={({ item }) => <Text>{item.name}</Text>}
+          />
         </SafeAreaView>
       </Fragment>
     );
