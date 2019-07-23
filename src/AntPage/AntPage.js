@@ -9,6 +9,8 @@ import {
   FlatList,
 } from 'react-native';
 
+import AntStats from '../AntStats/AntStats.js';
+
 class AntPage extends Component {
   constructor() {
     super();
@@ -43,7 +45,7 @@ class AntPage extends Component {
           <FlatList
             data={this.state.ants}
             keyExtractor={(item, index) => index.toString()}
-            renderItem={({ item }) => <Text>{item.name}</Text>}
+            renderItem={({ item }) => <AntStats name={item.name} />}
           />
         </SafeAreaView>
       </Fragment>
