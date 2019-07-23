@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   column2: {
-    flex: 2,
+    flex: 4,
   },
   column3: {
     flex: 1,
