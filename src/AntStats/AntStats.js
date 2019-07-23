@@ -5,17 +5,26 @@ import PropTypes from 'prop-types';
 class AntStats extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      status: 'not yet run',
+    };
 
     this.handleGenerator = this.handleGenerator.bind(this);
+    this.runCalculation = this.runCalculation.bind(this);
   }
 
   componentDidMount() {
+    // this.runCalculation();
+    setTimeout(this.runCalculation, 5000);
+  }
+
+  runCalculation() {
     this.props.generator(this.handleGenerator);
+    this.setState({ status: 'in progress' });
   }
 
   handleGenerator(value) {
-    this.setState({ odds: value });
+    this.setState({ odds: value, status: 'calculated' });
   }
 
   render() {
@@ -47,7 +56,7 @@ class AntStats extends Component {
           </View>
           <View>
             <Text style={styles.headingText}>Status</Text>
-            <Text style={styles.infoText}>{this.props.status}</Text>
+            <Text style={styles.infoText}>{this.state.status}</Text>
           </View>
         </View>
       </View>
