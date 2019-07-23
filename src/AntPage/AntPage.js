@@ -27,12 +27,7 @@ class AntPage extends Component {
     })
       .then(res => res.json())
       .then(res => {
-        let temp = res.data.ants.concat(res.data.ants);
-        let doug = temp.concat(temp).concat(temp);
-        // console.log(JSON.stringify(doug));
-        this.setState({ ants: doug.concat(doug) });
-        // this.setState(temp);
-        // console.log(JSON.stringify(this.state));
+        this.setState(res.data);
       })
       .catch(err => console.log(JSON.stringify(err)));
   }
