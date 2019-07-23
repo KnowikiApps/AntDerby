@@ -16,8 +16,10 @@ function AntStats(props) {
       <View style={styles.column2}>
         <Text>{props.name}</Text>
         <Text>{`color: ${props.color}`}</Text>
-        <Text>{`length: ${props.length}`}</Text>
-        <Text>{`weight: ${props.weight}`}</Text>
+        <View style={styles.rowLayout}>
+          <Text>{`length: ${props.length}`}</Text>
+          <Text>{`    weight: ${props.weight}`}</Text>
+        </View>
       </View>
       <View style={styles.column3}>
         <View>
@@ -58,6 +60,7 @@ const styles = StyleSheet.create({
   },
   infoText: {
     textAlign: 'center',
+    fontSize: 10,
   },
 });
 
