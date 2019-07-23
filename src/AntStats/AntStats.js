@@ -1,11 +1,17 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Image } from 'react-native';
 import PropTypes from 'prop-types';
 
 function AntStats(props) {
   return (
     <View style={styles.rowLayout}>
-      <View style={styles.column1} />
+      <View style={styles.column1}>
+        <Image
+          source={require('../img/Ant.png')}
+          style={styles.antImage}
+          resizeMode="contain"
+        />
+      </View>
       <View style={styles.column2}>
         <Text>{props.name}</Text>
         <Text>{`color: ${props.color}`}</Text>
@@ -30,6 +36,11 @@ const styles = StyleSheet.create({
   },
   column3: {
     flex: 1,
+  },
+  antImage: {
+    flex: 1,
+    height: undefined,
+    width: undefined,
   },
 });
 
