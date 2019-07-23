@@ -17,6 +17,9 @@ class AntPage extends Component {
     this.state = {
       ants: [],
     };
+
+    this.generateAntWinLikelihoodCalculator = this.generateAntWinLikelihoodCalculator.bind(this);  // eslint-disable-line prettier/prettier
+    this.generateCalculators = this.generateCalculators.bind(this);
   }
 
   componentDidMount() {
@@ -29,7 +32,29 @@ class AntPage extends Component {
       .then(res => {
         this.setState(res.data);
       })
+      .then(() => this.generateCalculators())
       .catch(err => console.log(JSON.stringify(err)));
+  }
+
+  generateCalculators() {
+    const temp = [];
+    this.state.ants.forEach(ant => {
+      let updated = ant;
+      updated.gen = this.generateAntWinLikelihoodCalculator();
+      temp.push(updated);
+    });
+    this.setState({ ants: temp });
+  }
+
+  generateAntWinLikelihoodCalculator() {
+    const delay = 7000 + Math.random() * 7000;
+    const likelihoodOfAntWinning = Math.random();
+
+    return callback => {
+      setTimeout(() => {
+        callback(likelihoodOfAntWinning);
+      }, delay);
+    };
   }
 
   render() {
