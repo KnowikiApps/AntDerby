@@ -6,6 +6,16 @@ class AntStats extends Component {
   constructor(props) {
     super(props);
     this.state = {};
+
+    this.handleGenerator = this.handleGenerator.bind(this);
+  }
+
+  componentDidMount() {
+    this.props.generator(this.handleGenerator);
+  }
+
+  handleGenerator(value) {
+    this.setState({ odds: value });
   }
 
   render() {
@@ -33,7 +43,7 @@ class AntStats extends Component {
         <View style={styles.column3}>
           <View>
             <Text style={styles.headingText}>Odds</Text>
-            <Text style={styles.infoText}>{this.props.odds}</Text>
+            <Text style={styles.infoText}>{this.state.odds}</Text>
           </View>
           <View>
             <Text style={styles.headingText}>Status</Text>
