@@ -22,6 +22,7 @@ class AntPage extends Component {
     this.generateAntWinLikelihoodCalculator = this.generateAntWinLikelihoodCalculator.bind(this);  // eslint-disable-line prettier/prettier
     this.generateCalculators = this.generateCalculators.bind(this);
     this.handleAntStatusChange = this.handleAntStatusChange.bind(this);
+    this.sortAnts = this.sortAnts.bind(this);
   }
 
   componentDidMount() {
@@ -60,10 +61,18 @@ class AntPage extends Component {
   }
 
   handleAntStatusChange(index, state) {
-    let temp = this.state.ants;
-    temp[index].odds = state.odds;
-    temp[index].status = state.status;
-    this.setState({ ants: temp });
+    let tempAnts = Object.assign([], this.state.ants); //make a copy of the ants array from state
+    let temp = Object.assign({}, tempAnts[index]); //make a copy of the ant data object at the array index
+    temp.odds = state.odds; //add values without mutating state
+    temp.status = state.status;
+    tempAnts[index] = temp; //assign new data to the original index
+    this.setState({ ants: this.sortAnts(tempAnts) });
+  }
+
+  sortAnts(arr) {
+    return arr.sort((a, b) => {
+      return a.odds - b.odds;
+    });
   }
 
   render() {
