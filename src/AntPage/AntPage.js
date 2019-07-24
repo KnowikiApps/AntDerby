@@ -13,6 +13,7 @@ import {
 import PropTypes from 'prop-types';
 
 import AntStats from '../AntStats/AntStats.js';
+import Header from '../Header/Header.js';
 
 class AntPage extends Component {
   constructor() {
@@ -83,6 +84,7 @@ class AntPage extends Component {
       <Fragment>
         <StatusBar barStyle="dark-content" />
         <SafeAreaView>
+          <Header />
           {this.state.ready ? (
             <FlatList
               data={this.state.ants}
