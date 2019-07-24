@@ -12,9 +12,15 @@ class Home extends Component {
     };
 
     this.logOut = this.logOut.bind(this);
+    this.checkAuth = this.checkAuth.bind(this);
+    this.handleLoggedIn = this.handleLoggedIn.bind(this);
   }
 
   componentDidMount() {
+    this.checkAuth();
+  }
+
+  checkAuth() {
     AsyncStorage.getItem('@authenticated').then(value => {
       console.log(value);
       this.setState({ authenticated: value > 0 });
@@ -27,8 +33,17 @@ class Home extends Component {
       .catch(err => console.log(err));
   }
 
+  handleLoggedIn(username) {
+    this.checkAuth();
+    this.setState({ username: username });
+  }
+
   render() {
-    return this.state.authenticated ? <AntPage /> : <LoginPage />;
+    return this.state.authenticated ? (
+      <AntPage />
+    ) : (
+      <LoginPage onLoggedIn={this.handleLoggedIn} />
+    );
   }
 }
 

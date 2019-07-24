@@ -31,6 +31,8 @@ class LoginPage extends Component {
         await AsyncStorage.setItem('@authenticated', true);
       } catch (e) {
         console.log(e);
+      } finally {
+        this.props.onLoggedIn(this.state.username);
       }
     } else {
       Alert.alert(
@@ -91,6 +93,8 @@ const styles = StyleSheet.create({
   },
 });
 
-LoginPage.propTypes = {};
+LoginPage.propTypes = {
+  onLoggedIn: PropTypes.func,
+};
 
 export default LoginPage;
