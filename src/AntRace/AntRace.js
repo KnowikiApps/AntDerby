@@ -6,6 +6,7 @@ import {
   Dimensions,
   Animated,
   Easing,
+  ImageBackground,
 } from 'react-native';
 import PropTypes from 'prop-types';
 
@@ -40,23 +41,29 @@ class AntRace extends Component {
   render() {
     return (
       <View style={styles.layout}>
-        <Animated.View style={[styles.racetrack]}>
-          <Animated.Image
-            source={require('../img/Ant.png')}
-            style={[styles.antImage, { left: this.state.ant1 }]}
-            resizeMode="contain"
-          />
-          <Animated.Image
-            source={require('../img/Ant.png')}
-            style={[styles.antImage, { left: this.state.ant2 }]}
-            resizeMode="contain"
-          />
-          <Animated.Image
-            source={require('../img/Ant.png')}
-            style={[styles.antImage, { left: this.state.ant3 }]}
-            resizeMode="contain"
-          />
-        </Animated.View>
+        <ImageBackground
+          source={require('../img/TrackTexture.png')}
+          style={styles.track}
+          resizeMode="repeat"
+        >
+          <Animated.View style={[styles.racetrack]}>
+            <Animated.Image
+              source={require('../img/Ant.png')}
+              style={[styles.antImage, { left: this.state.ant1 }]}
+              resizeMode="contain"
+            />
+            <Animated.Image
+              source={require('../img/Ant.png')}
+              style={[styles.antImage, { left: this.state.ant2 }]}
+              resizeMode="contain"
+            />
+            <Animated.Image
+              source={require('../img/Ant.png')}
+              style={[styles.antImage, { left: this.state.ant3 }]}
+              resizeMode="contain"
+            />
+          </Animated.View>
+        </ImageBackground>
       </View>
     );
   }
@@ -66,7 +73,6 @@ const styles = StyleSheet.create({
   layout: {
     height: '25%',
     width: '100%',
-    backgroundColor: '#EAD0A8',
   },
   racetrack: {
     height: '100%',
@@ -74,6 +80,10 @@ const styles = StyleSheet.create({
   },
   antImage: {
     flex: 1,
+  },
+  track: {
+    width: '100%',
+    height: '100%',
   },
 });
 
