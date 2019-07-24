@@ -1,15 +1,46 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, TextInput, SafeAreaView } from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  TextInput,
+  SafeAreaView,
+  Button,
+  Alert,
+} from 'react-native';
 
 import PropTypes from 'prop-types';
+import AsyncStorage from '@react-native-community/async-storage';
 
 class LoginPage extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      username: '',
+      password: '',
+    };
+
+    this.handleLogin = this.handleLogin.bind(this);
   }
 
   componentDidMount() {}
+
+  async handleLogin() {
+    if (this.state.username !== '' && this.state.password !== '') {
+      try {
+        await AsyncStorage.setItem('@authenticated', true);
+      } catch (e) {
+        console.log(e);
+      }
+    } else {
+      Alert.alert(
+        'Empty Login Error',
+        'Username and Password Required',
+        [{ text: 'OK', onPress: () => console.log('OK Pressed') }],
+        { cancelable: false }
+      );
+    }
+  }
 
   render() {
     return (
@@ -34,6 +65,9 @@ class LoginPage extends Component {
             style={styles.field}
             secureTextEntry
           />
+        </View>
+        <View style={styles.rowStyle}>
+          <Button title="Login" onPress={this.handleLogin} />
         </View>
       </SafeAreaView>
     );
