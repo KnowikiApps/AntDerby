@@ -7,7 +7,10 @@ import {
   Text,
   StatusBar,
   FlatList,
+  Button,
 } from 'react-native';
+
+import PropTypes from 'prop-types';
 
 import AntStats from '../AntStats/AntStats.js';
 
@@ -103,6 +106,9 @@ class AntPage extends Component {
               <Text>Loading...</Text>
             </View>
           )}
+          <View style={styles.rowStyle}>
+            <Button title="Logout" onPress={this.props.onLoggedOut} />
+          </View>
         </SafeAreaView>
       </Fragment>
     );
@@ -134,5 +140,9 @@ const styles = StyleSheet.create({
      backgroundColor: 'powderblue',
   }
 });
+
+AntPage.propTypes = {
+  onLoggedOut: PropTypes.func,
+};
 
 export default AntPage;

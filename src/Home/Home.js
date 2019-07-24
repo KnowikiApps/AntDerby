@@ -11,7 +11,7 @@ class Home extends Component {
       authenticated: false,
     };
 
-    this.logOut = this.logOut.bind(this);
+    this.handleLogOut = this.handleLogOut.bind(this);
     this.checkAuth = this.checkAuth.bind(this);
     this.handleLoggedIn = this.handleLoggedIn.bind(this);
   }
@@ -27,7 +27,7 @@ class Home extends Component {
     });
   }
 
-  logOut() {
+  handleLogOut() {
     AsyncStorage.setItem('@authenticated', false)
       .then(() => this.setState({ authenticated: false }))
       .catch(err => console.log(err));
@@ -40,7 +40,7 @@ class Home extends Component {
 
   render() {
     return this.state.authenticated ? (
-      <AntPage />
+      <AntPage onLoggedOut={this.handleLogOut} />
     ) : (
       <LoginPage onLoggedIn={this.handleLoggedIn} />
     );
