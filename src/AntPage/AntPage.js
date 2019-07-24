@@ -99,7 +99,9 @@ class AntPage extends Component {
               )}
             />
           ) : (
-            <View />
+            <View style={styles.loading}>
+              <Text>Loading...</Text>
+            </View>
           )}
         </SafeAreaView>
       </Fragment>
@@ -126,6 +128,11 @@ const styles = StyleSheet.create({
   highlight: {
     fontWeight: '700',
   },
+  loading: {
+     height: '100%',
+     width: '100%',
+     backgroundColor: 'powderblue',
+  }
 });
 
 export default AntPage;
