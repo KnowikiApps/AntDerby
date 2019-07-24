@@ -14,6 +14,7 @@ import PropTypes from 'prop-types';
 
 import AntStats from '../AntStats/AntStats.js';
 import Header from '../Header/Header.js';
+import AntRace from '../AntRace/AntRace.js';
 
 class AntPage extends Component {
   constructor() {
@@ -110,6 +111,9 @@ class AntPage extends Component {
           )}
           <View style={styles.rowStyle}>
             <Button title="Logout" onPress={this.props.onLoggedOut} />
+          </View>
+          <View style={styles.rowStyle}>
+            <AntRace />
           </View>
         </SafeAreaView>
       </Fragment>
