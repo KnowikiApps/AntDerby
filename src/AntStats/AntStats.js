@@ -7,6 +7,7 @@ class AntStats extends Component {
     super(props);
     this.state = {
       status: 'not yet run',
+      odds: 0,
     };
 
     this.handleGenerator = this.handleGenerator.bind(this);
@@ -17,15 +18,19 @@ class AntStats extends Component {
     setTimeout(this.runCalculation, 5000);
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    if (this.state !== prevState) {
+      this.props.onStatusChange(this.props.index, this.state);
+    }
+  }
+
   runCalculation() {
     this.props.generator(this.handleGenerator);
-    this.setState({ odds: 0, status: 'in progress', name: this.props.name });
-    this.props.onStatusChange(this.props.index, this.state);
+    this.setState({ odds: 0, status: 'in progress' });
   }
 
   handleGenerator(value) {
     this.setState({ odds: value, status: 'calculated' });
-    this.props.onStatusChange(this.props.index, this.state);
   }
 
   render() {
@@ -53,11 +58,11 @@ class AntStats extends Component {
         <View style={styles.column3}>
           <View>
             <Text style={styles.headingText}>Odds</Text>
-            <Text style={styles.infoText}>{this.state.odds}</Text>
+            <Text style={styles.infoText}>{this.props.odds}</Text>
           </View>
           <View>
             <Text style={styles.headingText}>Status</Text>
-            <Text style={styles.infoText}>{this.state.status}</Text>
+            <Text style={styles.infoText}>{this.props.status}</Text>
           </View>
         </View>
       </View>
@@ -102,6 +107,8 @@ AntStats.propTypes = {
   generator: PropTypes.func,
   onStatusChange: PropTypes.func,
   index: PropTypes.number,
+  odds: PropTypes.number,
+  status: PropTypes.string,
 };
 
 export default AntStats;

@@ -93,6 +93,8 @@ class AntPage extends Component {
                   generator={item.gen}
                   onStatusChange={this.handleAntStatusChange}
                   index={index}
+                  odds={item.odds}
+                  status={item.status}
                 />
               )}
             />
