@@ -1,9 +1,9 @@
 import React from 'react';
 
-import AntPage from './src/AntPage/AntPage.js';
+import Home from './src/Home/Home.js';
 
 const App = () => {
-  return <AntPage />;
+  return <Home />;
 };
 
 export default App;
