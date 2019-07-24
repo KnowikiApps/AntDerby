@@ -1,25 +1,62 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, Image, Button } from 'react-native';
+import {
+  StyleSheet,
+  View,
+  Image,
+  Dimensions,
+  Animated,
+  Easing,
+} from 'react-native';
 import PropTypes from 'prop-types';
 
 class AntRace extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      ant1: new Animated.Value(0),
+      ant2: new Animated.Value(0),
+      ant3: new Animated.Value(0),
+    };
   }
 
-  componentDidMount() {}
+  componentDidMount() {
+    Animated.timing(this.state.ant1, {
+      toValue: Dimensions.get('window').width,
+      easing: Easing.ease,
+      duration: Math.floor(Math.random() * 20000 + 10000),
+    }).start();
+    Animated.timing(this.state.ant2, {
+      toValue: Dimensions.get('window').width,
+      easing: Easing.ease,
+      duration: Math.floor(Math.random() * 20000 + 10000),
+    }).start();
+    Animated.timing(this.state.ant3, {
+      toValue: Dimensions.get('window').width,
+      easing: Easing.ease,
+      duration: Math.floor(Math.random() * 20000 + 10000),
+    }).start();
+  }
 
   render() {
     return (
       <View style={styles.layout}>
-        <View style={styles.animatedAnt}>
-          <Image
+        <Animated.View style={[styles.racetrack]}>
+          <Animated.Image
             source={require('../img/Ant.png')}
-            style={styles.antImage}
+            style={[styles.antImage, { left: this.state.ant1 }]}
             resizeMode="contain"
           />
-        </View>
+          <Animated.Image
+            source={require('../img/Ant.png')}
+            style={[styles.antImage, { left: this.state.ant2 }]}
+            resizeMode="contain"
+          />
+          <Animated.Image
+            source={require('../img/Ant.png')}
+            style={[styles.antImage, { left: this.state.ant3 }]}
+            resizeMode="contain"
+          />
+        </Animated.View>
       </View>
     );
   }
@@ -27,18 +64,16 @@ class AntRace extends Component {
 
 const styles = StyleSheet.create({
   layout: {
-    height: '15%',
+    height: '25%',
     width: '100%',
     backgroundColor: '#EAD0A8',
   },
+  racetrack: {
+    height: '100%',
+    width: '100%',
+  },
   antImage: {
     flex: 1,
-    height: undefined,
-    width: undefined,
-  },
-  animatedAnt: {
-    width: '20%',
-    height: '100%',
   },
 });
 
