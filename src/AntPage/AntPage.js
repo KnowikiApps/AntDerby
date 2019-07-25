@@ -134,13 +134,16 @@ class AntPage extends Component {
     return (
       <Fragment>
         <StatusBar barStyle="dark-content" />
-        <SafeAreaView>
-          <Header
-            onCalculate={this.handleCalculateButton}
-            allStatus={this.state.allStatus}
-          />
+        <SafeAreaView style={styles.container}>
+          <View style={styles.headerContainer}>
+            <Header
+              onCalculate={this.handleCalculateButton}
+              allStatus={this.state.allStatus}
+            />
+          </View>
           {this.state.ready ? (
             <FlatList
+              style={styles.antList}
               data={this.state.ants}
               keyExtractor={(item, index) => index.toString()}
               renderItem={({ item, index }) => (
@@ -159,7 +162,7 @@ class AntPage extends Component {
               <Text>Loading...</Text>
             </View>
           )}
-          <View style={styles.rowStyle}>
+          <View style={styles.buttonRow}>
             <Button title="Logout" onPress={this.props.onLoggedOut} />
           </View>
           <View style={styles.rowStyle}>
@@ -172,29 +175,31 @@ class AntPage extends Component {
 }
 
 const styles = StyleSheet.create({
-  scrollView: {
-    backgroundColor: 'white',
-  },
-  body: {
-    backgroundColor: 'white',
-  },
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-    color: 'white',
-  },
-  highlight: {
-    fontWeight: '700',
-  },
   loading: {
-     height: '100%',
-     width: '100%',
-     backgroundColor: 'powderblue',
-  }
+    height: '100%',
+    width: '100%',
+    backgroundColor: 'powderblue',
+  },
+  rowStyle: {
+    height: '15%',
+    width: '100%',
+  },
+  buttonRow: {
+    height: '5%',
+    width: '100%',
+  },
+  container: {
+    height: '100%',
+    width: '100%',
+  },
+  headerContainer: {
+    height: '20%',
+    width: '100%',
+  },
+  antList: {
+    height: '80%',
+    width: '100%',
+  },
 });
 
 AntPage.propTypes = {
