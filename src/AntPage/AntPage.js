@@ -22,6 +22,7 @@ class AntPage extends Component {
     this.state = {
       ants: [],
       ready: true,
+      allStatus: 'not yet run',
     };
 
     this.ants = [];
@@ -53,6 +54,9 @@ class AntPage extends Component {
   }
 
   handleCalculateButton() {
+    if (this.state.allStatus === 'calculated') {
+      this.setCalculators();
+    }
     this.runCalculations();
   }
 
@@ -93,7 +97,15 @@ class AntPage extends Component {
   }
 
   updateState() {
+    let status = 'not yet run'; //status of all calculations
+    let calculated = 0; //count of ants with status 'calculated'
+    let ip = 0; //count of ants with status 'in progress'
     let tempAnts = this.ants.map(ant => {
+      if (ant.status === 'calculated') {
+        calculated++;
+      } else if (ant.status === 'in progress') {
+        ip++;
+      }
       return {
         name: ant.name,
         color: ant.color,
@@ -103,7 +115,13 @@ class AntPage extends Component {
         status: ant.status,
       };
     });
-    this.setState({ ants: this.sortAnts(tempAnts) });
+
+    if (ip > 0) {
+      status = 'in progress';
+    } else if (calculated === this.ants.length) {
+      status = 'calculated';
+    }
+    this.setState({ ants: this.sortAnts(tempAnts), allStatus: status });
   }
 
   sortAnts(arr) {
@@ -117,7 +135,10 @@ class AntPage extends Component {
       <Fragment>
         <StatusBar barStyle="dark-content" />
         <SafeAreaView>
-          <Header onCalculate={this.handleCalculateButton} />
+          <Header
+            onCalculate={this.handleCalculateButton}
+            allStatus={this.state.allStatus}
+          />
           {this.state.ready ? (
             <FlatList
               data={this.state.ants}
