@@ -2,7 +2,6 @@ import React, { Component, Fragment } from 'react';
 import {
   SafeAreaView,
   StyleSheet,
-  ScrollView,
   View,
   Text,
   StatusBar,
@@ -175,7 +174,11 @@ class AntPage extends Component {
             </View>
           )}
           <View style={styles.rowStyle}>
-            {this.state.ready ? <AntRace racers={this.state.staticAnts} /> : <View />}
+            {this.state.ready ? (
+              <AntRace racers={this.state.staticAnts} />
+            ) : (
+              <View />
+            )}
           </View>
           <View style={styles.buttonRow}>
             <Button title="Logout" onPress={this.props.onLoggedOut} />
