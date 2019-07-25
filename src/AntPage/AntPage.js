@@ -29,9 +29,10 @@ class AntPage extends Component {
     this.setCalculators = this.setCalculators.bind(this);
     this.generateAntWinLikelihoodCalculator = this.generateAntWinLikelihoodCalculator.bind(this);  // eslint-disable-line prettier/prettier
     this.runCalculations = this.runCalculations.bind(this);
-
+    this.handleCalculateButton = this.handleCalculateButton.bind(this);
     this.handleAntStatusChange = this.handleAntStatusChange.bind(this);
     this.sortAnts = this.sortAnts.bind(this);
+    this.updateState = this.updateState.bind(this);
   }
 
   componentDidMount() {
@@ -44,19 +45,24 @@ class AntPage extends Component {
       .then(res => {
         this.ants = res.data.ants;
       })
-      .then(() => this.setCalculators())
+      .then(() => {
+        this.setCalculators();
+        this.updateState();
+      })
       .catch(err => console.log(JSON.stringify(err)));
   }
 
+  handleCalculateButton() {
+    this.runCalculations();
+  }
+
   setCalculators() {
-    console.table(this.ants);
     for (let i = 0; i < this.ants.length; i++) {
       this.ants[i].calculator = this.generateAntWinLikelihoodCalculator();
       this.ants[i].odds = 0;
       this.ants[i].status = 'not yet run';
     }
-    console.table(this.ants);
-    this.runCalculations();
+    this.updateState();
   }
 
   runCalculations() {
@@ -68,7 +74,7 @@ class AntPage extends Component {
         this.handleAntStatusChange(i);
       });
     }
-    console.table(this.ants);
+    this.updateState();
   }
 
   generateAntWinLikelihoodCalculator() {
@@ -83,8 +89,10 @@ class AntPage extends Component {
   }
 
   handleAntStatusChange(index) {
-    console.log(`handleAntStatusChange->${index}`);
-    console.table(this.ants);
+    this.updateState();
+  }
+
+  updateState() {
     let tempAnts = this.ants.map(ant => {
       return {
         name: ant.name,
@@ -96,7 +104,6 @@ class AntPage extends Component {
       };
     });
     this.setState({ ants: this.sortAnts(tempAnts) });
-    console.table(this.state.ants);
   }
 
   sortAnts(arr) {
@@ -110,7 +117,7 @@ class AntPage extends Component {
       <Fragment>
         <StatusBar barStyle="dark-content" />
         <SafeAreaView>
-          <Header onCalculate={this.generateCalculators} />
+          <Header onCalculate={this.handleCalculateButton} />
           {this.state.ready ? (
             <FlatList
               data={this.state.ants}
