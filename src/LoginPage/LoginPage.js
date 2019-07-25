@@ -7,6 +7,7 @@ import {
   SafeAreaView,
   Button,
   Alert,
+  Image,
 } from 'react-native';
 
 import PropTypes from 'prop-types';
@@ -47,7 +48,13 @@ class LoginPage extends Component {
   render() {
     return (
       <SafeAreaView style={styles.colLayout}>
-        <View style={styles.spacer} />
+        <View style={styles.row1}>
+          <Image
+            source={require('../img/Logo.png')}
+            style={styles.antImage}
+            resizeMode="contain"
+          />
+        </View>
         <View style={styles.rowStyle}>
           <Text style={styles.label}>Username</Text>
         </View>
@@ -119,6 +126,14 @@ const styles = StyleSheet.create({
   buttonGrp: {
     flexDirection: 'row',
     alignSelf: 'center',
+  },
+  antImage: {
+    flex: 1,
+    height: undefined,
+    width: undefined,
+  },
+  row1: {
+    flex: 3,
   },
 });
 
