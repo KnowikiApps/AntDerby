@@ -10,12 +10,16 @@ class AntStats extends Component {
       odds: 0,
     };
 
-    this.handleGenerator = this.handleGenerator.bind(this);
+    this.calculator;
+
+    this.handleCalculator = this.handleCalculator.bind(this);
     this.runCalculation = this.runCalculation.bind(this);
+    this.generateAntWinLikelihoodCalculator = this.generateAntWinLikelihoodCalculator.bind(this);  // eslint-disable-line prettier/prettier
   }
 
   componentDidMount() {
     setTimeout(this.runCalculation, 5000);
+    this.calculator = this.generateAntWinLikelihoodCalculator();
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -24,12 +28,25 @@ class AntStats extends Component {
     }
   }
 
+  generateAntWinLikelihoodCalculator() {
+    const delay = 7000 + Math.random() * 7000;
+    const likelihoodOfAntWinning = Math.random();
+
+    return callback => {
+      setTimeout(() => {
+        callback(likelihoodOfAntWinning);
+      }, delay);
+    };
+  }
+
   runCalculation() {
-    this.props.generator(this.handleGenerator);
+    console.log(`running calculation->${this.props.name}`);
+    this.calculator(this.handleCalculator);
     this.setState({ odds: 0, status: 'in progress' });
   }
 
-  handleGenerator(value) {
+  handleCalculator(value) {
+    console.log(`calculation complete->${this.props.name}`);
     this.setState({ odds: value, status: 'calculated' });
   }
 
@@ -104,7 +121,6 @@ AntStats.propTypes = {
   color: PropTypes.string.isRequired,
   length: PropTypes.number.isRequired,
   weight: PropTypes.number.isRequired,
-  generator: PropTypes.func,
   onStatusChange: PropTypes.func,
   index: PropTypes.number,
   odds: PropTypes.number,

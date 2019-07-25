@@ -21,11 +21,9 @@ class AntPage extends Component {
     super();
     this.state = {
       ants: [],
-      ready: false,
+      ready: true,
     };
 
-    this.generateAntWinLikelihoodCalculator = this.generateAntWinLikelihoodCalculator.bind(this);  // eslint-disable-line prettier/prettier
-    this.generateCalculators = this.generateCalculators.bind(this);
     this.handleAntStatusChange = this.handleAntStatusChange.bind(this);
     this.sortAnts = this.sortAnts.bind(this);
   }
@@ -40,29 +38,7 @@ class AntPage extends Component {
       .then(res => {
         this.setState(res.data);
       })
-      .then(() => this.generateCalculators())
       .catch(err => console.log(JSON.stringify(err)));
-  }
-
-  generateCalculators() {
-    const temp = [];
-    this.state.ants.forEach(ant => {
-      let updated = ant;
-      updated.gen = this.generateAntWinLikelihoodCalculator();
-      temp.push(updated);
-    });
-    this.setState({ ants: temp, ready: true });
-  }
-
-  generateAntWinLikelihoodCalculator() {
-    const delay = 7000 + Math.random() * 7000;
-    const likelihoodOfAntWinning = Math.random();
-
-    return callback => {
-      setTimeout(() => {
-        callback(likelihoodOfAntWinning);
-      }, delay);
-    };
   }
 
   handleAntStatusChange(index, state) {
@@ -96,7 +72,6 @@ class AntPage extends Component {
                   color={item.color}
                   length={item.length}
                   weight={item.weight}
-                  generator={item.gen}
                   onStatusChange={this.handleAntStatusChange}
                   index={index}
                   odds={item.odds}
