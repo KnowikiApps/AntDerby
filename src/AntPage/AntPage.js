@@ -147,6 +147,9 @@ class AntPage extends Component {
               style={styles.antList}
               data={this.state.ants}
               keyExtractor={(item, index) => index.toString()}
+              ItemSeparatorComponent={() => <View style={styles.separator} />}
+              ListHeaderComponent={() => <View style={styles.separator} />}
+              ListFooterComponent={() => <View style={styles.separator} />}
               renderItem={({ item, index }) => (
                 <AntStats
                   name={item.name}
@@ -200,6 +203,10 @@ const styles = StyleSheet.create({
   antList: {
     height: '80%',
     width: '100%',
+  },
+  separator: {
+    height: 5,
+    backgroundColor: 'grey',
   },
 });
 
