@@ -21,16 +21,25 @@ class Header extends Component {
           />
         </View>
         <View style={styles.row2}>
-          <Text>Welcome {this.props.username}</Text>
+          <Text style={styles.text}>
+            Lets race some ants {this.props.username}!
+          </Text>
         </View>
         <View style={styles.row3}>
-          <Text>Test Status: {this.props.allStatus}</Text>
-          <Button
-            title="Calculate Odds"
-            onPress={this.props.onCalculate}
-            disabled={this.props.allStatus === 'in progress'}
-          />
+          <View style={styles.row3spacer} />
+          <Text style={styles.testStatus}>
+            {`Test Status: ${this.props.allStatus}`}
+          </Text>
+          <View style={styles.calcButtonContainer}>
+            <Button
+              title="Calculate Odds"
+              onPress={this.props.onCalculate}
+              disabled={this.props.allStatus === 'in progress'}
+            />
+          </View>
+          <View style={styles.row3spacer} />
         </View>
+        <View style={styles.row4} />
       </View>
     );
   }
@@ -42,12 +51,16 @@ const styles = StyleSheet.create({
     backgroundColor: '#9A4242',
   },
   row1: {
-    flex: 1,
+    flex: 3,
   },
   row2: {
-    flex: 1,
+    flex: 2,
   },
   row3: {
+    flex: 2,
+    flexDirection: 'row',
+  },
+  row4: {
     flex: 1,
     flexDirection: 'row',
   },
@@ -55,6 +68,29 @@ const styles = StyleSheet.create({
     flex: 1,
     height: undefined,
     width: undefined,
+  },
+  text: {
+    color: '#C1D895',
+    fontWeight: 'bold',
+    textAlign: 'center',
+  },
+  testStatus: {
+    flex: 5,
+    alignSelf: 'center',
+    color: '#C1D895',
+    fontWeight: 'bold',
+    textAlign: 'left',
+  },
+  calcButtonContainer: {
+    flex: 4,
+    alignSelf: 'flex-end',
+    backgroundColor: 'lightgrey',
+    borderRadius: 5,
+    borderColor: 'black',
+    borderStyle: 'solid',
+  },
+  row3spacer: {
+    flex: 1,
   },
 });
 
