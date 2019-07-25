@@ -38,8 +38,7 @@ class Header extends Component {
 
 const styles = StyleSheet.create({
   colLayout: {
-    height: '25%',
-    width: '100%',
+    flex: 1,
     backgroundColor: '#afa939',
   },
   row1: {

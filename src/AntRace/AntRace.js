@@ -77,7 +77,7 @@ class AntRace extends Component {
 
 const styles = StyleSheet.create({
   layout: {
-    height: '25%',
+    height: '100%',
     width: '100%',
   },
   racetrack: {
