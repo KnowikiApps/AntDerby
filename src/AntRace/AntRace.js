@@ -1,47 +1,17 @@
 import React, { Component } from 'react';
-import {
-  StyleSheet,
-  View,
-  Image,
-  Dimensions,
-  Animated,
-  Easing,
-  ImageBackground,
-} from 'react-native';
+import { StyleSheet, View, ImageBackground } from 'react-native';
 import PropTypes from 'prop-types';
+
+import Racer from './Racer.js';
 
 class AntRace extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      ant1: new Animated.Value(0),
-      ant2: new Animated.Value(0),
-      ant3: new Animated.Value(0),
-    };
+    this.state = {};
   }
 
   componentDidMount() {
-    Animated.loop(
-      Animated.timing(this.state.ant1, {
-        toValue: Dimensions.get('window').width,
-        easing: Easing.ease,
-        duration: Math.floor(Math.random() * 20000 + 10000),
-      })
-    ).start();
-    Animated.loop(
-      Animated.timing(this.state.ant2, {
-        toValue: Dimensions.get('window').width,
-        easing: Easing.ease,
-        duration: Math.floor(Math.random() * 20000 + 10000),
-      })
-    ).start();
-    Animated.loop(
-      Animated.timing(this.state.ant3, {
-        toValue: Dimensions.get('window').width,
-        easing: Easing.ease,
-        duration: Math.floor(Math.random() * 20000 + 10000),
-      })
-    ).start();
+    console.log(this.props.racers);
   }
 
   render() {
@@ -52,23 +22,18 @@ class AntRace extends Component {
           style={styles.track}
           resizeMode="repeat"
         >
-          <Animated.View style={[styles.racetrack]}>
-            <Animated.Image
-              source={require('../img/Ant.png')}
-              style={[styles.antImage, { left: this.state.ant1 }]}
-              resizeMode="contain"
-            />
-            <Animated.Image
-              source={require('../img/Ant.png')}
-              style={[styles.antImage, { left: this.state.ant2 }]}
-              resizeMode="contain"
-            />
-            <Animated.Image
-              source={require('../img/Ant.png')}
-              style={[styles.antImage, { left: this.state.ant3 }]}
-              resizeMode="contain"
-            />
-          </Animated.View>
+          {this.props.racers.map((item, index) => {
+            return (
+              <View style={styles.racetrack} key={index}>
+                <Racer odds={item.odds} />
+                <ImageBackground
+                  source={require('../img/LineTexture.png')}
+                  style={styles.line}
+                  resizeMode="repeat"
+                />
+              </View>
+            );
+          })}
         </ImageBackground>
       </View>
     );
@@ -81,18 +46,23 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   racetrack: {
-    height: '100%',
-    width: '100%',
+    flex: 1,
   },
   antImage: {
     flex: 1,
   },
   track: {
+    flex: 1,
+    backgroundColor: '#A13939',
+  },
+  line: {
+    height: 12,
     width: '100%',
-    height: '100%',
   },
 });
 
-AntRace.propTypes = {};
+AntRace.propTypes = {
+  racers: PropTypes.array,
+};
 
 export default AntRace;

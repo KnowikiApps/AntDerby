@@ -21,7 +21,7 @@ class AntPage extends Component {
     super();
     this.state = {
       ants: [],
-      ready: true,
+      ready: false,
       allStatus: 'not yet run',
     };
 
@@ -121,7 +121,11 @@ class AntPage extends Component {
     } else if (calculated === this.ants.length) {
       status = 'calculated';
     }
-    this.setState({ ants: this.sortAnts(tempAnts), allStatus: status });
+    this.setState({
+      ants: this.sortAnts(tempAnts),
+      allStatus: status,
+      ready: true,
+    });
   }
 
   sortAnts(arr) {
@@ -167,7 +171,7 @@ class AntPage extends Component {
             </View>
           )}
           <View style={styles.rowStyle}>
-            <AntRace />
+            {this.state.ready ? <AntRace racers={this.ants} /> : <View />}
           </View>
           <View style={styles.buttonRow}>
             <Button title="Logout" onPress={this.props.onLoggedOut} />
