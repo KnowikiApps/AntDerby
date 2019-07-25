@@ -166,11 +166,11 @@ class AntPage extends Component {
               <Text>Loading...</Text>
             </View>
           )}
-          <View style={styles.buttonRow}>
-            <Button title="Logout" onPress={this.props.onLoggedOut} />
-          </View>
           <View style={styles.rowStyle}>
             <AntRace />
+          </View>
+          <View style={styles.buttonRow}>
+            <Button title="Logout" onPress={this.props.onLoggedOut} />
           </View>
         </SafeAreaView>
       </Fragment>
@@ -191,6 +191,7 @@ const styles = StyleSheet.create({
   buttonRow: {
     height: '5%',
     width: '100%',
+    backgroundColor: 'lightgrey',
   },
   container: {
     height: '100%',
