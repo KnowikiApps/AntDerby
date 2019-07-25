@@ -125,7 +125,7 @@ class AntPage extends Component {
     this.setState({
       ants: this.sortAnts(tempAnts),
       allStatus: status,
-      ready: true,
+      ready: false,
       staticAnts: tempAnts,
     });
   }
@@ -142,11 +142,13 @@ class AntPage extends Component {
         <StatusBar barStyle="dark-content" />
         <SafeAreaView style={styles.container}>
           <View style={styles.headerContainer}>
-            <Header
-              onCalculate={this.handleCalculateButton}
-              allStatus={this.state.allStatus}
-              username={this.props.username}
-            />
+            {this.state.ready && (
+              <Header
+                onCalculate={this.handleCalculateButton}
+                allStatus={this.state.allStatus}
+                username={this.props.username}
+              />
+            )}
           </View>
           {this.state.ready ? (
             <FlatList
@@ -169,7 +171,7 @@ class AntPage extends Component {
             />
           ) : (
             <View style={styles.loading}>
-              <Text>Loading...</Text>
+              <Text style={styles.loadingText}>Loading...</Text>
             </View>
           )}
           <View style={styles.rowStyle}>
@@ -188,7 +190,11 @@ const styles = StyleSheet.create({
   loading: {
     height: '100%',
     width: '100%',
-    backgroundColor: 'powderblue',
+    backgroundColor: '#9A4242',
+  },
+  loadingText: {
+    fontSize: 25,
+    textAlign: 'center',
   },
   rowStyle: {
     height: '15%',
@@ -206,6 +212,7 @@ const styles = StyleSheet.create({
   headerContainer: {
     height: '20%',
     width: '100%',
+    backgroundColor: '#9A4242',
   },
   antList: {
     height: '80%',
