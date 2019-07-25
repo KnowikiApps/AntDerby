@@ -40,7 +40,7 @@ class Home extends Component {
 
   render() {
     return this.state.authenticated ? (
-      <AntPage onLoggedOut={this.handleLogOut} />
+      <AntPage onLoggedOut={this.handleLogOut} username={this.state.username} />
     ) : (
       <LoginPage onLoggedIn={this.handleLoggedIn} />
     );

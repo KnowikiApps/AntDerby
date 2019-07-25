@@ -139,6 +139,7 @@ class AntPage extends Component {
             <Header
               onCalculate={this.handleCalculateButton}
               allStatus={this.state.allStatus}
+              username={this.props.username}
             />
           </View>
           {this.state.ready ? (
@@ -204,6 +205,7 @@ const styles = StyleSheet.create({
 
 AntPage.propTypes = {
   onLoggedOut: PropTypes.func,
+  username: PropTypes.string,
 };
 
 export default AntPage;
