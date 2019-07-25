@@ -24,6 +24,12 @@ class AntPage extends Component {
       ready: true,
     };
 
+    this.ants = [];
+
+    this.setCalculators = this.setCalculators.bind(this);
+    this.generateAntWinLikelihoodCalculator = this.generateAntWinLikelihoodCalculator.bind(this);  // eslint-disable-line prettier/prettier
+    this.runCalculations = this.runCalculations.bind(this);
+
     this.handleAntStatusChange = this.handleAntStatusChange.bind(this);
     this.sortAnts = this.sortAnts.bind(this);
   }
@@ -36,18 +42,61 @@ class AntPage extends Component {
     })
       .then(res => res.json())
       .then(res => {
-        this.setState(res.data);
+        this.ants = res.data.ants;
       })
+      .then(() => this.setCalculators())
       .catch(err => console.log(JSON.stringify(err)));
   }
 
-  handleAntStatusChange(index, state) {
-    let tempAnts = Object.assign([], this.state.ants); //make a copy of the ants array from state
-    let temp = Object.assign({}, tempAnts[index]); //make a copy of the ant data object at the array index
-    temp.odds = state.odds; //add values without mutating state
-    temp.status = state.status;
-    tempAnts[index] = temp; //assign new data to the original index
+  setCalculators() {
+    console.table(this.ants);
+    for (let i = 0; i < this.ants.length; i++) {
+      this.ants[i].calculator = this.generateAntWinLikelihoodCalculator();
+      this.ants[i].odds = 0;
+      this.ants[i].status = 'not yet run';
+    }
+    console.table(this.ants);
+    this.runCalculations();
+  }
+
+  runCalculations() {
+    for (let i = 0; i < this.ants.length; i++) {
+      this.ants[i].status = 'in progress';
+      this.ants[i].calculator(value => {
+        this.ants[i].odds = value;
+        this.ants[i].status = 'calculated';
+        this.handleAntStatusChange(i);
+      });
+    }
+    console.table(this.ants);
+  }
+
+  generateAntWinLikelihoodCalculator() {
+    const delay = 7000 + Math.random() * 7000;
+    const likelihoodOfAntWinning = Math.random();
+
+    return callback => {
+      setTimeout(() => {
+        callback(likelihoodOfAntWinning);
+      }, delay);
+    };
+  }
+
+  handleAntStatusChange(index) {
+    console.log(`handleAntStatusChange->${index}`);
+    console.table(this.ants);
+    let tempAnts = this.ants.map(ant => {
+      return {
+        name: ant.name,
+        color: ant.color,
+        length: ant.length,
+        weight: ant.weight,
+        odds: ant.odds,
+        status: ant.status,
+      };
+    });
     this.setState({ ants: this.sortAnts(tempAnts) });
+    console.table(this.state.ants);
   }
 
   sortAnts(arr) {
@@ -72,8 +121,6 @@ class AntPage extends Component {
                   color={item.color}
                   length={item.length}
                   weight={item.weight}
-                  onStatusChange={this.handleAntStatusChange}
-                  index={index}
                   odds={item.odds}
                   status={item.status}
                 />
