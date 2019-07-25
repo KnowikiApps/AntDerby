@@ -21,21 +21,27 @@ class AntRace extends Component {
   }
 
   componentDidMount() {
-    Animated.timing(this.state.ant1, {
-      toValue: Dimensions.get('window').width,
-      easing: Easing.ease,
-      duration: Math.floor(Math.random() * 20000 + 10000),
-    }).start();
-    Animated.timing(this.state.ant2, {
-      toValue: Dimensions.get('window').width,
-      easing: Easing.ease,
-      duration: Math.floor(Math.random() * 20000 + 10000),
-    }).start();
-    Animated.timing(this.state.ant3, {
-      toValue: Dimensions.get('window').width,
-      easing: Easing.ease,
-      duration: Math.floor(Math.random() * 20000 + 10000),
-    }).start();
+    Animated.loop(
+      Animated.timing(this.state.ant1, {
+        toValue: Dimensions.get('window').width,
+        easing: Easing.ease,
+        duration: Math.floor(Math.random() * 20000 + 10000),
+      })
+    ).start();
+    Animated.loop(
+      Animated.timing(this.state.ant2, {
+        toValue: Dimensions.get('window').width,
+        easing: Easing.ease,
+        duration: Math.floor(Math.random() * 20000 + 10000),
+      })
+    ).start();
+    Animated.loop(
+      Animated.timing(this.state.ant3, {
+        toValue: Dimensions.get('window').width,
+        easing: Easing.ease,
+        duration: Math.floor(Math.random() * 20000 + 10000),
+      })
+    ).start();
   }
 
   render() {
