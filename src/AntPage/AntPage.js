@@ -124,7 +124,7 @@ class AntPage extends Component {
     this.setState({
       ants: this.sortAnts(tempAnts),
       allStatus: status,
-      ready: false,
+      ready: true,
       staticAnts: tempAnts,
     });
   }
