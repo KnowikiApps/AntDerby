@@ -85,7 +85,7 @@ class AntPage extends Component {
       <Fragment>
         <StatusBar barStyle="dark-content" />
         <SafeAreaView>
-          <Header />
+          <Header onCalculate={this.generateCalculators} />
           {this.state.ready ? (
             <FlatList
               data={this.state.ants}

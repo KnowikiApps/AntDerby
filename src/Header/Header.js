@@ -25,12 +25,7 @@ class Header extends Component {
         </View>
         <View style={styles.row3}>
           <Text>Welcome Dude!</Text>
-          <Button
-            title="Calculate Odds"
-            onPress={() => {
-              console.log('calculate odds');
-            }}
-          />
+          <Button title="Calculate Odds" onPress={this.props.onCalculate} />
         </View>
       </View>
     );
@@ -60,6 +55,8 @@ const styles = StyleSheet.create({
   },
 });
 
-Header.propTypes = {};
+Header.propTypes = {
+  onCalculate: PropTypes.func,
+};
 
 export default Header;
