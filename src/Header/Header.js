@@ -24,8 +24,12 @@ class Header extends Component {
           <Text>Welcome Dude!</Text>
         </View>
         <View style={styles.row3}>
-          <Text>Welcome Dude!</Text>
-          <Button title="Calculate Odds" onPress={this.props.onCalculate} />
+          <Text>Test Status: {this.props.allStatus}</Text>
+          <Button
+            title="Calculate Odds"
+            onPress={this.props.onCalculate}
+            disabled={this.props.allStatus === 'in progress'}
+          />
         </View>
       </View>
     );
@@ -57,6 +61,7 @@ const styles = StyleSheet.create({
 
 Header.propTypes = {
   onCalculate: PropTypes.func,
+  allStatus: PropTypes.string,
 };
 
 export default Header;
