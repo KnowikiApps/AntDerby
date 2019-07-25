@@ -8,9 +8,18 @@ class Racer extends Component {
     this.state = {
       position: new Animated.Value(-50),
     };
+
+    this.buildAnimation = this.buildAnimation.bind(this);
   }
 
-  componentDidMount() {
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    if (this.props !== prevProps) {
+      this.setState({ odds: this.props.odds });
+      this.buildAnimation();
+    }
+  }
+
+  buildAnimation() {
     Animated.loop(
       Animated.timing(this.state.position, {
         toValue: Dimensions.get('window').width,

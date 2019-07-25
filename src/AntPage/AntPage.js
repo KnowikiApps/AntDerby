@@ -23,6 +23,7 @@ class AntPage extends Component {
       ants: [],
       ready: false,
       allStatus: 'not yet run',
+      staticAnts: [],
     };
 
     this.ants = [];
@@ -125,6 +126,7 @@ class AntPage extends Component {
       ants: this.sortAnts(tempAnts),
       allStatus: status,
       ready: true,
+      staticAnts: tempAnts,
     });
   }
 
@@ -171,7 +173,7 @@ class AntPage extends Component {
             </View>
           )}
           <View style={styles.rowStyle}>
-            {this.state.ready ? <AntRace racers={this.ants} /> : <View />}
+            {this.state.ready ? <AntRace racers={this.state.staticAnts} /> : <View />}
           </View>
           <View style={styles.buttonRow}>
             <Button title="Logout" onPress={this.props.onLoggedOut} />
