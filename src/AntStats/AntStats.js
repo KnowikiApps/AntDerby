@@ -20,12 +20,17 @@ class AntStats extends Component {
   componentDidMount() {
     setTimeout(this.runCalculation, 5000);
     this.calculator = this.generateAntWinLikelihoodCalculator();
+    console.log(this.calculator);
   }
 
   componentDidUpdate(prevProps, prevState) {
     if (this.state !== prevState) {
       this.props.onStatusChange(this.props.index, this.state);
     }
+  }
+
+  componentWillUnmount() {
+    clearTimeout(this.calculator);
   }
 
   generateAntWinLikelihoodCalculator() {
