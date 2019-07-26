@@ -26,7 +26,9 @@ function AntStats(props) {
         <View style={styles.column3}>
           <View>
             <Text style={styles.headingText}>Odds</Text>
-            <Text style={styles.infoText}>{props.odds}</Text>
+            <Text style={styles.infoText}>
+              {Number.parseFloat(props.odds).toPrecision(2)}
+            </Text>
           </View>
           <View>
             <Text style={styles.headingText}>Status</Text>
