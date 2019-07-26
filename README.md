@@ -61,7 +61,11 @@ In the second terminal run:
 react-native run-ios
 ```
 
-## Image Sources
+## Loggin In
+
+The login feature will accept any login and password for now
+
+# Image Sources
 
 Ant Image source:
 https://commons.wikimedia.org/wiki/File:Ant_(Jacob_Eckert).svg
