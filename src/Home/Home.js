@@ -23,13 +23,12 @@ class Home extends Component {
 
   checkAuth() {
     AsyncStorage.getItem('@authenticated').then(value => {
-      console.log(value);
       this.setState({ authenticated: value === 'true' });
     });
   }
 
   handleLogOut() {
-    AsyncStorage.setItem('@authenticated', false)
+    AsyncStorage.setItem('@authenticated', 'false')
       .then(() => this.setState({ authenticated: false }))
       .catch(err => console.log(err));
   }
