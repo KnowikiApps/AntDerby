@@ -10,10 +10,6 @@ class AntRace extends Component {
     this.state = {};
   }
 
-  componentDidMount() {
-    console.log(this.props.racers);
-  }
-
   render() {
     return (
       <View style={styles.layout}>
