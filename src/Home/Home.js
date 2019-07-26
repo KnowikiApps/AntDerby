@@ -24,7 +24,7 @@ class Home extends Component {
   checkAuth() {
     AsyncStorage.getItem('@authenticated').then(value => {
       console.log(value);
-      this.setState({ authenticated: value > 0 });
+      this.setState({ authenticated: value === 'true' });
     });
   }
 

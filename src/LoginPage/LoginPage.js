@@ -29,7 +29,7 @@ class LoginPage extends Component {
   async handleLogin() {
     if (this.state.username !== '' && this.state.password !== '') {
       try {
-        await AsyncStorage.setItem('@authenticated', true);
+        await AsyncStorage.setItem('@authenticated', 'true');
       } catch (e) {
         console.log(e);
       } finally {
