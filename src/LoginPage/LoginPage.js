@@ -47,93 +47,74 @@ class LoginPage extends Component {
 
   render() {
     return (
-      <SafeAreaView style={styles.colLayout}>
-        <View style={styles.row1}>
+      <SafeAreaView style={styles.safeArea}>
+        <View style={styles.headerLogo}>
           <Image
             source={require('../img/Logo.png')}
-            style={styles.antImage}
+            style={styles.logo}
             resizeMode="contain"
           />
         </View>
-        <View style={styles.rowStyle}>
+        <View style={styles.loginBox}>
           <Text style={styles.label}>Username</Text>
-        </View>
-        <View style={styles.fieldBkg}>
-          <TextInput
-            onChangeText={text => this.setState({ username: text })}
-            value={this.state.username}
-            style={styles.field}
-          />
-        </View>
-        <View style={styles.rowStyle} />
-        <View style={styles.rowStyle}>
-          <Text style={styles.label}>Password</Text>
-        </View>
-        <View style={styles.fieldBkg}>
-          <TextInput
-            onChangeText={text => this.setState({ password: text })}
-            value={this.state.password}
-            style={styles.field}
-            secureTextEntry
-          />
-        </View>
-        <View style={styles.rowStyle} />
-        <View style={styles.buttonGrp}>
-          <View style={styles.buttonRowCol} />
-          <View style={[styles.buttonRowCol, styles.buttonBkg]}>
-            <Button title="Login" onPress={this.handleLogin} color="#2B580C" />
+          <View style={styles.fieldBkg}>
+            <TextInput
+              style={styles.field}
+              onChangeText={text => this.setState({ username: text })}
+              value={this.state.username}
+            />
           </View>
-          <View style={styles.buttonRowCol} />
+          <Text style={styles.label}>Password</Text>
+          <View style={styles.fieldBkg}>
+            <TextInput
+              onChangeText={text => this.setState({ password: text })}
+              value={this.state.password}
+              style={styles.field}
+              secureTextEntry
+            />
+          </View>
+          <View style={styles.btnBox}>
+            <Button title="Login" onPress={this.handleLogin} />
+            {/* <Button title="Login" onPress={this.handleLogin} /> */}
+          </View>
         </View>
-        <View style={styles.spacer} />
       </SafeAreaView>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  colLayout: {
-    flex: 1,
+  safeArea: {
+    width: '100%',
+    height: '100%',
     backgroundColor: '#9A4242',
   },
-  field: {
-    flex: 2,
-    borderColor: 'gray',
-    borderWidth: 1,
+  headerLogo: {
+    width: '100%',
+    height: '20%',
   },
-  label: {
-    flex: 1,
-    width: 100,
+  logo: {
+    width: '100%',
     height: '100%',
-    color: '#C1D895',
-  },
-  rowStyle: {
-    flex: 1,
-  },
-  spacer: {
-    flex: 10,
   },
   fieldBkg: {
-    flex: 1,
     backgroundColor: 'lightgrey',
   },
-  buttonBkg: {
-    backgroundColor: 'lightgrey',
+  label: {
+    color: '#C1D895',
+    fontSize: 20,
   },
-  buttonRowCol: {
-    flex: 1,
+  field: {
+    borderColor: 'gray',
+    borderWidth: 1,
+    fontSize: 15,
+    height: 40,
   },
-  buttonGrp: {
-    flexDirection: 'row',
+  btnBox: {
+    width: '50%',
     alignSelf: 'center',
-  },
-  antImage: {
-    flex: 1,
-    height: undefined,
-    width: undefined,
-  },
-  row1: {
-    flex: 3,
+    marginTop: 20,
+    backgroundColor: '#2B580C',
   },
 });
 
